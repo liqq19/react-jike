@@ -15,8 +15,9 @@ import { PlusOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import './index.scss'
 import { useEffect, useState } from 'react'
-import { getChannelAPI } from '@/apis/article'
+import { createArticleAPI, getChannelAPI } from '@/apis/article'
 import Item from 'antd/es/list/Item'
+import { type } from '@testing-library/user-event/dist/type'
 
 const { Option } = Select
 
@@ -30,6 +31,20 @@ const Publish = () => {
     }
     getChannelList()
   },[])
+  const onFinish = (formValue) => {
+    console.log('Success:', formValue)
+    const {title,content,channel_id}=formValue
+    const reqData={
+      title,
+      content,
+      cover:{
+        type:0,
+        images:[]
+      },
+      channel_id
+    }
+    createArticleAPI(reqData)
+  }
   return (
     <div className="publish">
       <Card
@@ -45,6 +60,7 @@ const Publish = () => {
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 16 }}
           initialValues={{ type: 1 }}
+          onFinish={onFinish}
         >
           <Form.Item
             label="标题"
