@@ -1,3 +1,5 @@
+import ReactQuill from 'react-quill-new'
+import 'react-quill/dist/quill.snow.css'
 import {
   Card,
   Breadcrumb,
@@ -52,7 +54,13 @@ const Publish = () => {
             label="内容"
             name="content"
             rules={[{ required: true, message: '请输入文章内容' }]}
-          ></Form.Item>
+          >
+            <ReactQuill
+              className="publish-quill"
+              theme="snow"
+              placeholder="请输入文章内容"
+            />
+          </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 4 }}>
             <Space>
