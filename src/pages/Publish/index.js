@@ -9,7 +9,8 @@ import {
   Input,
   Upload,
   Space,
-  Select
+  Select,
+  message
 } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
@@ -33,13 +34,14 @@ const Publish = () => {
   },[])
   const onFinish = (formValue) => {
     console.log('Success:', formValue)
+    if(imageList.length !==imageType)return message.warning('封面类型与图片数量不匹配')
     const {title,content,channel_id}=formValue
     const reqData={
       title,
       content,
       cover:{
-        type:0,
-        images:[]
+        type:imageType,
+        images:imageList.map(item=>item.response.data.url)
       },
       channel_id
     }
