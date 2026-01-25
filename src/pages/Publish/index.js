@@ -15,23 +15,14 @@ import {
 import { PlusOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import './index.scss'
-import { useEffect, useState } from 'react'
-import { createArticleAPI, getChannelAPI } from '@/apis/article'
-import Item from 'antd/es/list/Item'
-import { type } from '@testing-library/user-event/dist/type'
+import {  useState } from 'react'
+import { createArticleAPI} from '@/apis/article'
+import { useChannel } from '@/hooks/useChannel'
 
 const { Option } = Select
 
 const Publish = () => {
-  const [channelList,setChannelList]=useState([])
-
-  useEffect(()=>{
-    const getChannelList=async()=>{
-      const res=await getChannelAPI()
-      setChannelList(res.data.channels)
-    }
-    getChannelList()
-  },[])
+  const {channelList}=useChannel()
   const onFinish = (formValue) => {
     console.log('Success:', formValue)
     if(imageList.length !==imageType)return message.warning('封面类型与图片数量不匹配')
