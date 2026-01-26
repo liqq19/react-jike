@@ -105,7 +105,7 @@ const Article = () => {
     begin_pubdate:'',
     end_pubdate:'',
     page:1,
-    page_page:4
+    per_page:4
   })
   const[list,setList]=useState([])
   const[count,setCount]=useState(0)
@@ -127,11 +127,12 @@ const Article = () => {
       end_pubdate:fromValue.date[1].format('YYYY-MM-DD')
     })
   }
-  const onPageChange=(page)=>{
+  const onPageChange=(page, pageSize)=>{
     console.log(page)
     setReqData({
       ...reqData,
-      page
+      page,
+      per_page: pageSize
     })
   }
   return (
@@ -179,8 +180,9 @@ const Article = () => {
       </Card>
       <Card title={`根据筛选条件共查询到 ${count} 条结果：`}>
         <Table rowKey="id" columns={columns} dataSource={list} pagination={{
+          current:reqData.page,
           total:count,
-          pageSize:reqData.page_page,
+          pageSize:reqData.per_page,
           onChange:onPageChange,
         }} />
       </Card>
