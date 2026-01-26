@@ -84,16 +84,35 @@ const Article = () => {
       title: 'wkwebview离线化加载h5资源解决方案'
     }
   ]
+  const [reqData,setReqData]=useState({
+    status:'',
+    channel_id:'',
+    begin_pubdate:'',
+    end_pubdate:'',
+    page:1,
+    page_page:4
+  })
   const[list,setList]=useState([])
   const[count,setCount]=useState(0)
   useEffect(()=>{
     async function getList() {
-      const res= await getArticleListAPI()
+      const res= await getArticleListAPI(reqData)
       setList(res.data.results)
       setCount(res.data.total_count)
     }
     getList()
-  },[])
+  },[reqData])
+  const onFinish=(fromValue)=>{
+    console.log(fromValue)
+    setReqData({
+      ...reqData,
+      status:fromValue.status,
+      channel_id:fromValue.channel_id,
+      begin_pubdate:fromValue.date[0].format('YYYY-MM-DD'),
+      end_pubdate:fromValue.date[1].format('YYYY-MM-DD')
+    })
+  }
+
   return (
     <div>
       <Card
@@ -105,7 +124,7 @@ const Article = () => {
         }
         style={{ marginBottom: 20 }}
       >
-        <Form initialValues={{ status: '' }}>
+        <Form initialValues={{ status: '' }}onFinish={onFinish}>
           <Form.Item label="状态" name="status">
             <Radio.Group>
               <Radio value={''}>全部</Radio>
