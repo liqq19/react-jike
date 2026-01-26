@@ -31,3 +31,10 @@ export function getArticleById(id){
         url:`mp/articles/${id}`
     })
 }
+export function updateArticleAPI(data) {
+    return request({
+        url: `/mp/articles/${data.id}?draft=false`,
+        method: 'PUT',
+        data
+    })
+}
