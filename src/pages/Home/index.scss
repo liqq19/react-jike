@@ -1,0 +1,43 @@
+.home-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+}
+
+.chart-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.chart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* 折线图占据左侧上半部分 */
+.chart-line {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* 饼图占据右侧上半部分 */
+.chart-pie {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* 柱状图占据整个下半部分 */
+.chart-bar {
+  grid-column: 1 / 3;
+  grid-row: 2;
+}
