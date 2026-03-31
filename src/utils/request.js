@@ -4,7 +4,7 @@ import router from '@/router';
 import { removeToken } from "./token";
 
 const request = axios.create({
-    baseURL: "http://geek.itheima.net/v1_0",
+    baseURL: "/v1_0",  // 使用相对路径，通过 Nginx 反向代理访问外部 API
     timeout: 5000,
 });
 request.interceptors.request.use((config)=> {
